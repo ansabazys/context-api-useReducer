@@ -1,16 +1,13 @@
 import React, { useContext, useReducer } from "react";
 import "./Counter.css";
 import { counterReducer } from "./counterReducer.js";
+import { CounterContext } from "../../context/CounterContext.jsx";
 
 
 
 export const Counter = () => {
-  const [state, dispatch] = useReducer(counterReducer, {
-    count: 0,
-    error: "",
-  });
 
-  console.log(state.count);
+  const { state, dispatch } = useContext(CounterContext)
 
   return (
     <div className="container">
