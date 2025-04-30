@@ -1,6 +1,9 @@
 .container {
     display: flex;
     flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .container h1 {
@@ -10,4 +13,15 @@
 .button-container {
     display: flex;
     gap: 1rem;
+}
+
+.container button {
+    padding: 10px 20px;
+    font-size: 2rem;
+    background: none;
+    cursor: pointer;
+}
+
+.container p {
+   color: red;
 }

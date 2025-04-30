@@ -1,17 +1,50 @@
-import React, { useContext } from "react";
-import { Button } from "../Button/Button";
+import React, { useContext, useReducer } from "react";
 import "./Counter.css";
-import { CounterContext } from "../../context/CounterContext";
+import { counterReducer } from "./counterReducer.js";
+
+
 
 export const Counter = () => {
-  const { counter, onIncrement, onDecrement } = useContext(CounterContext);
+  const [state, dispatch] = useReducer(counterReducer, {
+    count: 0,
+    error: "",
+  });
+
+  console.log(state.count);
+
   return (
     <div className="container">
-      <h1>{counter}</h1>
+      <h1>{state.count}</h1>
       <div className="button-container">
-        <Button value="-" handleClick={onDecrement} />
-        <Button value="+" handleClick={onIncrement} />
+        <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+        <button onClick={() => dispatch({ type: "increment" })}>+</button>
+        <button onClick={() => dispatch({ type: "reset" })}>reset</button>
+        <button
+          onClick={() =>
+            dispatch({
+              type: "decrement_by",
+              payload: {
+                count: 5,
+              },
+            })
+          }
+        >
+          on decrement by 5
+        </button>
+        <button
+          onClick={() =>
+            dispatch({
+              type: "increment_by",
+              payload: {
+                count: 10,
+              },
+            })
+          }
+        >
+          on increment by 10
+        </button>
       </div>
+      {state.error && <p>{state.error}</p>}
     </div>
   );
 };
